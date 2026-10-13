@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Busymate SDK example — Settings</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <header>
+    <h1>Busymate AI SDK for Electron</h1>
+    <p id="versions" class="muted"></p>
+  </header>
+  <form id="settings" autocomplete="off">
+    <fieldset>
+      <legend>Chat</legend>
+      <label>Assistant slug <input name="assistant" required spellcheck="false"></label>
+      <label>Chat HTTPS URL <input name="chatUrl" type="url" required spellcheck="false"></label>
+      <label>Locale <input name="locale" placeholder="en" spellcheck="false"></label>
+      <label>Exact HTTPS origins (one per line)
+        <textarea name="origins" rows="2" spellcheck="false"></textarea>
+      </label>
+    </fieldset>
+    <fieldset>
+      <legend>Identity</legend>
+      <label class="row"><input type="radio" name="mode" value="guest"> Guest (no mint request)</label>
+      <label class="row"><input type="radio" name="mode" value="identified"> Identified: call my authenticated mint endpoint</label>
+      <label>Signed-in account ID (not a login) <input name="accountId" spellcheck="false"></label>
+      <label>Authenticated mint endpoint (HTTPS) <input name="mintUrl" type="url" spellcheck="false"></label>
+      <label>Backend session token (optional, memory only) <input name="sessionToken" type="password"></label>
+      <p class="muted">Never enter signing keys, admin keys or service-role credentials.</p>
+    </fieldset>
+    <fieldset>
+      <legend>Microphone and callbacks</legend>
+      <label class="row"><input type="checkbox" name="microphone"> Microphone: tap-triggered OS permission</label>
+      <label class="row"><input type="checkbox" name="handleCloseAction"> Handle <code>close</code> through onAction</label>
+      <label class="row"><input type="checkbox" name="closeCallback"> onClose fallback</label>
+    </fieldset>
+    <p id="error" role="alert"></p>
+    <div class="buttons">
+      <button type="submit">Apply and open chat</button>
+      <button type="button" id="accountChanged">Forward accountChanged()</button>
+      <button type="button" id="closeChat">Close chat</button>
+      <button type="button" id="reset">Reset</button>
+    </div>
+  </form>
+  <section>
+    <h2>Callbacks log</h2>
+    <p class="muted">Last 100 entries. No tokens, nonces, account IDs or audio are logged.</p>
+    <ol id="log"></ol>
+  </section>
+  <script src="settings.js"></script>
+</body>
+</html>

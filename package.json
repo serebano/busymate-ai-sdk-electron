@@ -1,0 +1,64 @@
+{
+  "name": "@busymate/ai-electron",
+  "version": "1.0.0",
+  "description": "Official versioned Busymate AI SDK for Electron: identity, WebView and microphone integration",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serebano/busymate-ai-sdk-electron.git"
+  },
+  "homepage": "https://github.com/serebano/busymate-ai-sdk-electron#readme",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./preload": "./dist/preload.js",
+    "./preload-bridge": "./frozen/v2/2.0.0/electron/preload.js",
+    "./frozen/*": "./frozen/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "frozen",
+    "CONTRACT-v2.md",
+    "CHANGELOG.md",
+    "release-manifest.json",
+    "docs"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "electron": ">=30"
+  },
+  "scripts": {
+    "build": "tsup && node scripts/build-preload.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "verify": "python3 scripts/verify-release.py",
+    "check": "npm run verify && npm run build && npm run typecheck && npm run lint && npm test"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.13.6",
+    "electron": "44.4.5",
+    "eslint": "10.11.0",
+    "globals": "17.12.0",
+    "tsup": "8.5.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.1",
+    "vitest": "5.0.1"
+  }
+}

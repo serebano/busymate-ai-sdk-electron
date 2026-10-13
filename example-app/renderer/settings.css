@@ -1,0 +1,16 @@
+:root { color-scheme: light dark; --muted: #6b7280; --accent: #2563eb; --border: #d1d5db; }
+@media (prefers-color-scheme: dark) { :root { --muted: #9ca3af; --border: #374151; } }
+body { font: 14px/1.4 system-ui, sans-serif; margin: 0 16px 24px; }
+h1 { font-size: 18px; margin: 16px 0 4px; }
+h2 { font-size: 15px; margin: 20px 0 4px; }
+.muted { color: var(--muted); margin: 4px 0; font-size: 12px; }
+fieldset { border: 1px solid var(--border); border-radius: 8px; margin: 12px 0; padding: 8px 12px 12px; }
+legend { font-weight: 600; padding: 0 4px; }
+label { display: block; margin: 8px 0 0; }
+label.row { display: flex; gap: 8px; align-items: center; }
+input:not([type=checkbox]):not([type=radio]), textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 2px; padding: 6px; font: inherit; }
+.buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+button { padding: 6px 12px; font: inherit; }
+button[type=submit] { background: var(--accent); color: #fff; border: 0; border-radius: 6px; }
+#error { color: #dc2626; min-height: 1em; }
+#log { font: 12px/1.5 ui-monospace, monospace; padding-left: 24px; max-height: 320px; overflow: auto; }
