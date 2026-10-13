@@ -37,16 +37,16 @@ describe("origins", () => {
     expect(sdk.originOfUrl("https://a.com/x?y")).toBe("https://a.com");
   });
 
-  it("defaults the guest chat to the desktop channel and English", () => {
-    expect(sdk.DEFAULT_GUEST_CHAT_URL).toBe("https://busymate.ai/support/busyproxy?channel=desktop&locale=en");
-    expect(sdk.SDK_VERSION).toBe("1.0.0");
+  it("defaults the guest chat to the desktop_sdk channel and English", () => {
+    expect(sdk.DEFAULT_GUEST_CHAT_URL).toBe("https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=en");
+    expect(sdk.SDK_VERSION).toBe("1.0.1");
     expect(sdk.MICROPHONE_ADAPTER).toBe("1.0.0");
   });
 });
 
 describe("secure hosts", () => {
   const base = {
-    url: "https://busymate.ai/support/busyproxy?channel=desktop&locale=en",
+    url: "https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=en",
     assistant: "busyproxy",
     origins: ["https://busymate.ai"],
     appId: "ai.busymate.example",
