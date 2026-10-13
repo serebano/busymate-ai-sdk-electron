@@ -9,12 +9,12 @@ const { createBackendMint } = load("../example-app/src/mint.js");
 const { actionCallback, closeCallback } = load("../example-app/src/callbacks.js");
 
 describe("example settings", () => {
-  it("defaults to the real hosted guest chat on the desktop channel", () => {
+  it("defaults to the real hosted guest chat on the desktop_sdk channel", () => {
     const result = validate(defaults());
     expect(result.ok).toBe(true);
     expect(result.value).toMatchObject({
       assistant: "busyproxy",
-      chatUrl: "https://busymate.ai/support/busyproxy?channel=desktop&locale=en",
+      chatUrl: "https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=en",
       origins: ["https://busymate.ai"],
       signedIn: false,
       microphone: true,
@@ -23,7 +23,7 @@ describe("example settings", () => {
   });
 
   it("applies the locale to the chat URL", () => {
-    expect(validate({ ...defaults(), locale: "pt-BR" }).value.chatUrl).toBe("https://busymate.ai/support/busyproxy?channel=desktop&locale=pt-BR");
+    expect(validate({ ...defaults(), locale: "pt-BR" }).value.chatUrl).toBe("https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=pt-BR");
     expect(validate({ ...defaults(), locale: "x y" }).ok).toBe(false);
   });
 

@@ -208,6 +208,12 @@ async function smoke() {
     result.checks.page = await wc.executeJavaScript(
       "({ origin: location.origin, bridge: typeof (window.BusymateBridge && window.BusymateBridge.postMessage), microphone: typeof (window.BusymateMicrophone && window.BusymateMicrophone.postMessage), require: typeof require, process: typeof process })",
     );
+    // Informational (the hosted chat's behaviour, not the SDK's): on `channel=desktop_sdk` the
+    // document carries the generic native canvas (`data-native-chrome="1"`), never the
+    // Busymate Console's `"desktop"` value, and `<html lang>` follows `locale` from the first frame.
+    result.checks.document = await wc.executeJavaScript(
+      "({ url: location.href, nativeChrome: document.documentElement.getAttribute('data-native-chrome'), lang: document.documentElement.lang })",
+    );
     // Give the hosted chat time to say hello over the bridge (its behaviour, not the SDK's).
     const deadline = Date.now() + 20000;
     while (Date.now() < deadline && !smokeEvents.some((e) => e.kind === "bridge-request")) await new Promise((r) => setTimeout(r, 250));

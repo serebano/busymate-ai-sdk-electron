@@ -8,7 +8,7 @@ const LOCALE = /^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/;
 function defaults() {
   return {
     assistant: "busyproxy",
-    chatUrl: "https://busymate.ai/support/busyproxy?channel=desktop&locale=en",
+    chatUrl: "https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=en",
     locale: "en",
     origins: "https://busymate.ai",
     signedIn: false,

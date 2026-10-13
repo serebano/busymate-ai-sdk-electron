@@ -23,7 +23,7 @@ under xvfb on Linux).
 ## Try the live guest flow
 
 The default URL is the real hosted chat:
-`https://busymate.ai/support/busyproxy?channel=desktop&locale=en`. The assistant
+`https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=en`. The assistant
 slug is `busyproxy` and the explicit extra origin is `https://busymate.ai`. This
 is a guest support assistant, not an authenticated example workspace or a stub.
 Its availability, knowledge and features belong to that tenant.

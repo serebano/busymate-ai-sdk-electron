@@ -17,7 +17,8 @@ published = {
 }
 for name, expected in published.items():
     assert m["files"].get(name) == expected, f"Frozen kit v2 differs from busymate.ai: {name}"
-assert m["version"] == "1.0.0" == pkg["version"], "version mismatch"
+assert m["version"] == "1.0.1" == pkg["version"], "version mismatch"
+assert "channel=desktop_sdk&" in m["defaultGuestChat"], "default guest chat must use the desktop_sdk channel"
 assert m["package"] == pkg["name"]
 assert m["identityWire"]["v2Build"] == "2.0.0" and m["microphoneAdapter"] == "1.0.0"
 example = json.loads((root / "example-app" / "package.json").read_text())

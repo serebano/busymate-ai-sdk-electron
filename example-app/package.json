@@ -1,6 +1,6 @@
 {
   "name": "busymate-ai-electron-example",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Example Electron app for @busymate/ai-electron: hosted guest chat, identity mint callback, microphone, settings and callbacks log.",
   "main": "main.js",
