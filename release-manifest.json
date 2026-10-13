@@ -1,0 +1,21 @@
+{
+  "sdk": "Busymate AI electron",
+  "package": "@busymate/ai-electron",
+  "version": "1.0.0",
+  "identityWire": {
+    "v2": 2,
+    "v2Build": "2.0.0"
+  },
+  "microphoneWire": 1,
+  "microphoneAdapter": "1.0.0",
+  "defaultGuestChat": "https://busymate.ai/support/busyproxy?channel=desktop&locale=en",
+  "frozenSource": "https://busymate.ai/sdk/v2/2.0.0/",
+  "files": {
+    "frozen/v2/2.0.0/core/busymateBridgeCore.js": "b4590d7fb20ba0ac3d79c80e41bebd880cfd6eda170d95e8b3f1cf7b4e8410f7",
+    "frozen/v2/2.0.0/electron/main.js": "7d52a2fccf94ad671a3d811f36989fc4649bed103c5d87f234973def887a2022",
+    "frozen/v2/2.0.0/electron/preload.js": "d5aaa1ff93374dabf4f653835ba527ba650fa330bdbf20b06b9e38961583a9be",
+    "src/microphone.ts": "d15274b9aac0c9b326d30b3bc035af79c25b04583eafe4d8f1be1bd73cc912f2",
+    "src/preload-microphone.ts": "1444678c27f4b7a73f5815e0c4b9addfaeeedb391e0e3ee4e323aad94c2a72f2",
+    "CONTRACT-v2.md": "c891b8bae48c87d5ae901de16df0594ba3879dd84ecd535e79120761d4220c1d"
+  }
+}
