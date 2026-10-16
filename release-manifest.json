@@ -1,13 +1,17 @@
 {
   "sdk": "Busymate AI electron",
   "package": "@busymate/ai-electron",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "identityWire": {
     "v2": 2,
     "v2Build": "2.0.0"
   },
   "microphoneWire": 1,
   "microphoneAdapter": "1.0.0",
+  "adapterAssets": [
+    "src/microphone.ts",
+    "src/preload-microphone.ts"
+  ],
   "defaultGuestChat": "https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=en",
   "frozenSource": "https://busymate.ai/sdk/v2/2.0.0/",
   "files": {

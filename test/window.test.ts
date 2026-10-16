@@ -39,7 +39,7 @@ describe("origins", () => {
 
   it("defaults the guest chat to the desktop_sdk channel and English", () => {
     expect(sdk.DEFAULT_GUEST_CHAT_URL).toBe("https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=en");
-    expect(sdk.SDK_VERSION).toBe("1.0.1");
+    expect(sdk.SDK_VERSION).toBe("1.0.2");
     expect(sdk.MICROPHONE_ADAPTER).toBe("1.0.0");
   });
 });
