@@ -80,6 +80,28 @@ event whose `data` is the JSON string, exactly like the Android adapter. Do not
 call the port from a page-load script: the chat owns the tap trigger and
 correlation, and waits up to 60 seconds.
 
+## Download the adapter
+
+`microphone.ts` and `preload-microphone.ts` (microphone adapter 1.0.0, wire 1) ship in this SDK and are attached to every GitHub release, with `SHA256SUMS`:
+
+`microphone.ts`:
+
+- Latest release: https://github.com/serebano/busymate-ai-sdk-electron/releases/latest/download/microphone.ts
+- Pinned, SDK 1.0.2: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.2/microphone.ts
+
+`preload-microphone.ts`:
+
+- Latest release: https://github.com/serebano/busymate-ai-sdk-electron/releases/latest/download/preload-microphone.ts
+- Pinned, SDK 1.0.2: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.2/preload-microphone.ts
+
+Checksums for both files:
+
+- Checksums: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.2/SHA256SUMS (`shasum -a 256 -c SHA256SUMS --ignore-missing`)
+
+The SDK installs the adapter itself; the standalone files are for audit and vendoring.
+
+This repository and its releases are the only source of the adapter. busymate.ai no longer publishes adapter copies; its legacy `https://busymate.ai/sdk/microphone/1.0.0/` files stay frozen for existing integrations.
+
 ## Troubleshooting
 
 | Symptom | Check |

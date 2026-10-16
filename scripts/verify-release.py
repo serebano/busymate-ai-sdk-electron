@@ -17,10 +17,20 @@ published = {
 }
 for name, expected in published.items():
     assert m["files"].get(name) == expected, f"Frozen kit v2 differs from busymate.ai: {name}"
-assert m["version"] == "1.0.1" == pkg["version"], "version mismatch"
+assert m["version"] == "1.0.2" == pkg["version"], "version mismatch"
 assert "channel=desktop_sdk&" in m["defaultGuestChat"], "default guest chat must use the desktop_sdk channel"
 assert m["package"] == pkg["name"]
 assert m["identityWire"]["v2Build"] == "2.0.0" and m["microphoneAdapter"] == "1.0.0"
 example = json.loads((root / "example-app" / "package.json").read_text())
 assert example["dependencies"]["@busymate/ai-electron"] == "file:..", "example must consume this SDK"
 print(f"release {m['version']} verified")
+
+# Every release attaches each adapter source file under its basename, listed in SHA256SUMS.
+_assets = m['adapterAssets']
+assert _assets, 'adapterAssets must list the microphone adapter source file(s)'
+assert len({Path(a).name for a in _assets}) == len(_assets), 'adapter asset basenames must be unique'
+for _a in _assets:
+    assert _a in m['files'], f'adapter asset {_a} is not pinned in files'
+    _sha = hashlib.sha256((root / _a).read_bytes()).hexdigest()
+    assert _sha == m['files'][_a], f'adapter asset {_a} changed'
+    print(f'verified adapter asset {Path(_a).name} {_sha}')

@@ -1,6 +1,6 @@
 {
   "name": "@busymate/ai-electron",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Official versioned Busymate AI SDK for Electron: identity, WebView and microphone integration",
   "license": "UNLICENSED",
   "repository": {

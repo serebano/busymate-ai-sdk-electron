@@ -3,7 +3,7 @@
 // Microphone: BusymateMicrophone wire 1, adapter 1.0.0.
 
 /** This SDK distribution's version. */
-export const SDK_VERSION = "1.0.1";
+export const SDK_VERSION = "1.0.2";
 
 /** The hosted guest chat used by the example: https://busymate.ai/support/<assistant>?channel=<channel>&locale=<locale>. */
 export function guestChatUrl(options: { assistant?: string; channel?: string; locale?: string } = {}): string {
