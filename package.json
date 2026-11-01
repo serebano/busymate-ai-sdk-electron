@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/serebano/busymate-ai-sdk-electron.git"
   },
-  "homepage": "https://github.com/serebano/busymate-ai-sdk-electron#readme",
+  "homepage": "https://busymate.ai/docs/guides/desktop-sdks#electron",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -60,5 +60,8 @@
     "typescript": "6.0.3",
     "typescript-eslint": "8.70.1",
     "vitest": "5.0.1"
+  },
+  "bugs": {
+    "url": "https://github.com/serebano/busymate-ai-sdk-electron/issues"
   }
 }
