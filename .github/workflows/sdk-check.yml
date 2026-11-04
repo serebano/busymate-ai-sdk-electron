@@ -6,14 +6,19 @@ on:
   pull_request:
 permissions:
   contents: read
+# Our runners only, never GitHub-hosted (owner order 2026-11-04): Linux = ephemeral k3s scale set ci-sdk-electron
+# (class sdk: Xvfb + Chromium libs, no sudo), macOS = the Mac runner bm-mac-busymate-ai-sdk-electron. There is no
+# Windows runner; the package is plain JS (no native module), so the former windows-latest leg is dropped.
 jobs:
   build:
     name: build (${{ matrix.os }})
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+        include:
+          - { os: linux, runner: '"ci-sdk-electron"' }
+          - { os: macos, runner: '["self-hosted","macOS","bm-mac"]' }
+    runs-on: ${{ fromJSON(matrix.runner) }}
     env:
       # Unit tests use an in-memory Electron stand-in; the binary is only needed for the example.
       ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
@@ -23,11 +28,8 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
       - name: Verify pinned and frozen sources
-        run: python scripts/verify-release.py
+        run: python3 scripts/verify-release.py
       - name: Install
         run: npm ci
       - name: Build SDK (ESM + CJS + types + sandboxed preload)
@@ -48,7 +50,7 @@ jobs:
           npm install --no-save ../busymate-ai-electron-1.0.2.tgz
           node -e "const s=require('@busymate/ai-electron'); if (s.SDK_VERSION!=='1.0.2') process.exit(1); const fs=require('fs'); for (const p of [s.preloadPath(), s.bridgePreloadPath()]) if (!fs.existsSync(p)) { console.error('missing', p); process.exit(1) } console.log('example resolves', s.SDK_VERSION, s.preloadPath())"
           node --check main.js && node --check settings-preload.js && node --check renderer/settings.js
-      - if: matrix.os == 'ubuntu-latest'
+      - if: matrix.os == 'linux'
         uses: actions/upload-artifact@v4
         with:
           name: busymate-ai-electron-1.0.2
@@ -56,7 +58,7 @@ jobs:
 
   smoke:
     name: smoke (xvfb, example app)
-    runs-on: ubuntu-latest
+    runs-on: ci-sdk-electron
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -72,22 +74,24 @@ jobs:
         run: |
           npm ci
           npm install --no-save ../busymate-ai-electron-1.0.2.tgz
-      - name: Allow the Chromium sandbox on the runner
-        run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb
-          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 || true
+      # The k3s runner pod runs with no-new-privs and no user namespaces, so Chromium's OS-level process sandbox
+      # (setuid helper or userns) cannot start there: the example launches with --no-sandbox. The renderer's
+      # webPreferences (sandbox: true, contextIsolation, no nodeIntegration) are still asserted by the smoke itself.
       - name: Launch example under xvfb
         working-directory: example-app
         run: |
           set -o pipefail
-          timeout 180 xvfb-run -a npx electron . --busymate-smoke 2>&1 | tee smoke.log
+          timeout 180 xvfb-run -a npx electron . --no-sandbox --busymate-smoke 2>&1 | tee smoke.log
           grep -q '^SMOKE_RESULT {.*"ok":true' smoke.log
 
   sdk-check:
     if: always()
     needs: [build, smoke]
-    runs-on: ubuntu-latest
+    runs-on: ci-sdk-electron
     steps:
+      - uses: actions/checkout@v4
+      - name: No GitHub-hosted runners (runs-on lint)
+        run: python3 .github/runs-on-lint.py
       - name: All SDK checks passed
         run: |
           test "${{ needs.build.result }}" = success
