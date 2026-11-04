@@ -88,7 +88,7 @@ jobs:
           grep -q '^SMOKE_RESULT {.*"ok":true' smoke.log
 
   sdk-check:
-    if: always()
+    if: ${{ always() && !cancelled() }}  # a cancelled run must not turn the gate red
     needs: [build, smoke]
     runs-on: ci-sdk-electron
     timeout-minutes: 30
