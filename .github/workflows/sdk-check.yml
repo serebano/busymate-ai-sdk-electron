@@ -6,9 +6,10 @@ on:
   pull_request:
 permissions:
   contents: read
-# Our runners only, never GitHub-hosted (owner order 2026-11-04): Linux = ephemeral k3s scale set ci-sdk-electron
-# (class sdk: Xvfb + Chromium libs, no sudo), macOS = the Mac runner bm-mac-busymate-ai-sdk-electron. There is no
-# Windows runner; the package is plain JS (no native module), so the former windows-latest leg is dropped.
+# Our runners only, never GitHub-hosted (owner order 2026-11-04): the ephemeral k3s scale set ci-sdk-electron
+# (class sdk: Xvfb + Chromium libs, no sudo). Only macOS work runs on the Mac (owner 2026-11-17): the package is
+# plain JS (no native module) and the unit tests use an in-memory Electron stand-in (the platform is passed
+# explicitly), so the former macOS leg, like the earlier windows-latest leg, repeated the Linux build and is dropped.
 jobs:
   build:
     name: build (${{ matrix.os }})
@@ -17,10 +18,8 @@ jobs:
       matrix:
         include:
           - { os: linux, runner: '"ci-sdk-electron"' }
-          - { os: macos, runner: '["self-hosted","macOS","bm-mac"]' }
     runs-on: ${{ fromJSON(matrix.runner) }}
-    # Mac jobs: the timeout includes the wait for the shared Mac's one-job lock.
-    timeout-minutes: ${{ contains(toJSON(matrix), 'bm-mac') && 150 || 30 }}
+    timeout-minutes: 30
     env:
       # Unit tests use an in-memory Electron stand-in; the binary is only needed for the example.
       ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
