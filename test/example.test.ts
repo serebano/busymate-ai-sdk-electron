@@ -14,7 +14,7 @@ describe("example settings", () => {
     expect(result.ok).toBe(true);
     expect(result.value).toMatchObject({
       assistant: "busyproxy",
-      chatUrl: "https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=en",
+      chatUrl: "https://busymate.ai/chat/w/busyproxy?channel=desktop_sdk&locale=en",
       origins: ["https://busymate.ai"],
       signedIn: false,
       microphone: true,
@@ -23,13 +23,13 @@ describe("example settings", () => {
   });
 
   it("applies the locale to the chat URL", () => {
-    expect(validate({ ...defaults(), locale: "pt-BR" }).value.chatUrl).toBe("https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=pt-BR");
+    expect(validate({ ...defaults(), locale: "pt-BR" }).value.chatUrl).toBe("https://busymate.ai/chat/w/busyproxy?channel=desktop_sdk&locale=pt-BR");
     expect(validate({ ...defaults(), locale: "x y" }).ok).toBe(false);
   });
 
   it("rejects unsafe URLs and origins", () => {
     expect(validate({ ...defaults(), assistant: "Bad Slug" }).ok).toBe(false);
-    expect(validate({ ...defaults(), chatUrl: "http://busymate.ai/support/busyproxy" }).ok).toBe(false);
+    expect(validate({ ...defaults(), chatUrl: "http://busymate.ai/chat/w/busyproxy" }).ok).toBe(false);
     expect(validate({ ...defaults(), chatUrl: "https://busymate.ai/x#frag" }).ok).toBe(false);
     expect(validate({ ...defaults(), origins: "https://*.busymate.ai" }).ok).toBe(false);
     expect(validate({ ...defaults(), origins: "https://busymate.ai/path" }).ok).toBe(false);

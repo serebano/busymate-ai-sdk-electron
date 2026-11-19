@@ -87,16 +87,16 @@ correlation, and waits up to 60 seconds.
 `microphone.ts`:
 
 - Latest release: https://github.com/serebano/busymate-ai-sdk-electron/releases/latest/download/microphone.ts
-- Pinned, SDK 1.0.2: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.2/microphone.ts
+- Pinned, SDK 1.0.4: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.4/microphone.ts
 
 `preload-microphone.ts`:
 
 - Latest release: https://github.com/serebano/busymate-ai-sdk-electron/releases/latest/download/preload-microphone.ts
-- Pinned, SDK 1.0.2: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.2/preload-microphone.ts
+- Pinned, SDK 1.0.4: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.4/preload-microphone.ts
 
 Checksums for both files:
 
-- Checksums: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.2/SHA256SUMS (`shasum -a 256 -c SHA256SUMS --ignore-missing`)
+- Checksums: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.4/SHA256SUMS (`shasum -a 256 -c SHA256SUMS --ignore-missing`)
 
 The SDK installs the adapter itself; the standalone files are for audit and vendoring.
 

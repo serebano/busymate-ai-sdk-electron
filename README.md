@@ -1,4 +1,4 @@
-# Busymate AI SDK for Electron — 1.0.2
+# Busymate AI SDK for Electron — 1.0.4
 
 Official independent Electron package for Busymate AI hosted chat: `@busymate/ai-electron`. Install once in your app; hosted chat receives web updates independently.
 
@@ -6,16 +6,16 @@ It ships the frozen identity bridge `BusymateBridge` (identity wire v2, immutabl
 
 ## Install from the GitHub release
 
-The package is not published to the npm registry. Install the packed tarball attached to the [1.0.2 release](https://github.com/serebano/busymate-ai-sdk-electron/releases/tag/1.0.2):
+The package is not published to the npm registry. Install the packed tarball attached to the [1.0.4 release](https://github.com/serebano/busymate-ai-sdk-electron/releases/tag/1.0.4):
 
 ```sh
-npm install https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.2/busymate-ai-electron-1.0.2.tgz
+npm install https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.4/busymate-ai-electron-1.0.4.tgz
 ```
 
 Or pin the git tag and build it locally (`dist/` is not committed, so the tarball is the simpler option):
 
 ```sh
-git clone --branch 1.0.2 --depth 1 https://github.com/serebano/busymate-ai-sdk-electron.git vendor/busymate-ai-sdk-electron
+git clone --branch 1.0.4 --depth 1 https://github.com/serebano/busymate-ai-sdk-electron.git vendor/busymate-ai-sdk-electron
 (cd vendor/busymate-ai-sdk-electron && npm ci && npm run build)
 npm install ./vendor/busymate-ai-sdk-electron
 ```
@@ -60,7 +60,7 @@ npm ci && npm run build
 cd example-app && npm ci && npm start
 ```
 
-The [example app](example-app/README.md) consumes this package (`file:..`). Its Settings window configures the chat URL, locale, exact origins, guest or identified mode (your mint endpoint), microphone on/off, the `onAction`/`onClose` callbacks, `accountChanged()`, and shows a callbacks log. The default guest chat is `https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=en`.
+The [example app](example-app/README.md) consumes this package (`file:..`). Its Settings window configures the chat URL, locale, exact origins, guest or identified mode (your mint endpoint), microphone on/off, the `onAction`/`onClose` callbacks, `accountChanged()`, and shows a callbacks log. The default guest chat is `https://busymate.ai/chat/w/busyproxy?channel=desktop_sdk&locale=en`.
 
 `desktop_sdk` is the hosted product's channel for third-party desktop apps built on the official desktop SDKs: the chat loads as the window's top-level page, uses the normal chat layout (no Busymate Console title-bar inset), applies `locale` from the first frame, and sessions are labelled "Desktop app (SDK)" in the Console. Do not use `desktop` (reserved for Busymate's own Console app) or `embed` (it needs an allow-listed parent frame and cannot start as a top-level window); see [configuration](docs/configuration.md#chat-url-and-channel).
 
@@ -71,16 +71,16 @@ The [example app](example-app/README.md) consumes this package (`file:..`). Its 
 `microphone.ts`:
 
 - Latest release: https://github.com/serebano/busymate-ai-sdk-electron/releases/latest/download/microphone.ts
-- Pinned, SDK 1.0.2: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.2/microphone.ts
+- Pinned, SDK 1.0.4: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.4/microphone.ts
 
 `preload-microphone.ts`:
 
 - Latest release: https://github.com/serebano/busymate-ai-sdk-electron/releases/latest/download/preload-microphone.ts
-- Pinned, SDK 1.0.2: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.2/preload-microphone.ts
+- Pinned, SDK 1.0.4: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.4/preload-microphone.ts
 
 Checksums for both files:
 
-- Checksums: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.2/SHA256SUMS (`shasum -a 256 -c SHA256SUMS --ignore-missing`)
+- Checksums: https://github.com/serebano/busymate-ai-sdk-electron/releases/download/1.0.4/SHA256SUMS (`shasum -a 256 -c SHA256SUMS --ignore-missing`)
 
 The SDK installs the adapter itself; the standalone files are for audit and vendoring.
 
@@ -100,4 +100,4 @@ npm run build && npm run typecheck && npm run lint && npm test
 
 CI (`sdk-check`, our own k3s Linux runners only; the package is plain JS, so there is no macOS or Windows leg) runs that, builds the example against the packed tarball, and launches the example under xvfb on Linux (renderer `sandbox: true` webPreferences, real hosted guest chat, both bridges present, no Node.js in the page; the runner pod has no user namespaces, so Chromium's OS process sandbox is off there with `--no-sandbox`). It does not certify OS microphone dialogs, code signing/notarization, auto-update or your backend integration.
 
-Distribution 1.0.2 differs from identity wire 2/build 2.0.0 and microphone wire 1/adapter 1.0.0. [Release manifest](release-manifest.json) pins the source hashes; the frozen kit files match `https://busymate.ai/sdk/v2/2.0.0/SHA256SUMS`. This repository is canonical for Electron SDK releases; [busymate.ai official documentation](https://busymate.ai/docs/guides/electron-sdk?utm_source=github&utm_medium=readme&utm_campaign=busymate-ai-sdk-electron) owns the human integration guides ([identity bridge compatibility](https://busymate.ai/docs/guides/app-bridge-v2?utm_source=github&utm_medium=readme&utm_campaign=busymate-ai-sdk-electron)). See [changelog](CHANGELOG.md) and [v2 wire contract](CONTRACT-v2.md).
+Distribution 1.0.4 differs from identity wire 2/build 2.0.0 and microphone wire 1/adapter 1.0.0. [Release manifest](release-manifest.json) pins the source hashes; the frozen kit files match `https://busymate.ai/sdk/v2/2.0.0/SHA256SUMS`. This repository is canonical for Electron SDK releases; [busymate.ai official documentation](https://busymate.ai/docs/guides/electron-sdk?utm_source=github&utm_medium=readme&utm_campaign=busymate-ai-sdk-electron) owns the human integration guides ([identity bridge compatibility](https://busymate.ai/docs/guides/app-bridge-v2?utm_source=github&utm_medium=readme&utm_campaign=busymate-ai-sdk-electron)). See [changelog](CHANGELOG.md) and [v2 wire contract](CONTRACT-v2.md).
