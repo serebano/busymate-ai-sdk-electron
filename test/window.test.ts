@@ -38,15 +38,15 @@ describe("origins", () => {
   });
 
   it("defaults the guest chat to the desktop_sdk channel and English", () => {
-    expect(sdk.DEFAULT_GUEST_CHAT_URL).toBe("https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=en");
-    expect(sdk.SDK_VERSION).toBe("1.0.2");
+    expect(sdk.DEFAULT_GUEST_CHAT_URL).toBe("https://busymate.ai/chat/w/busyproxy?channel=desktop_sdk&locale=en");
+    expect(sdk.SDK_VERSION).toBe("1.0.4");
     expect(sdk.MICROPHONE_ADAPTER).toBe("1.0.0");
   });
 });
 
 describe("secure hosts", () => {
   const base = {
-    url: "https://busymate.ai/support/busyproxy?channel=desktop_sdk&locale=en",
+    url: "https://busymate.ai/chat/w/busyproxy?channel=desktop_sdk&locale=en",
     assistant: "busyproxy",
     origins: ["https://busymate.ai"],
     appId: "ai.busymate.example",
@@ -71,7 +71,7 @@ describe("secure hosts", () => {
 
   it("refuses a chat URL outside the allow-list, http or with credentials", () => {
     expect(() => sdk.resolveChatTarget({ ...base, origins: [] })).toThrow(/not in the allowed origins/);
-    expect(() => sdk.resolveChatTarget({ ...base, url: "http://busymate.ai/support/busyproxy" })).toThrow(/https/);
+    expect(() => sdk.resolveChatTarget({ ...base, url: "http://busymate.ai/chat/w/busyproxy" })).toThrow(/https/);
     expect(() => sdk.resolveChatTarget({ ...base, url: "https://u:p@busymate.ai/" })).toThrow(/https/);
     expect(() => sdk.resolveChatTarget({ ...base, assistant: "", origins: [] })).toThrow(/no valid/);
     expect(sdk.resolveChatTarget(base).origins).toEqual([OWN, "https://busymate.ai"]);
@@ -92,7 +92,7 @@ describe("secure hosts", () => {
       wc.emit("will-navigate", { url, isMainFrame, preventDefault: () => (prevented = true) }, url);
       return prevented;
     };
-    expect(navigate("https://busymate.ai/support/busyproxy?x=1")).toBe(false);
+    expect(navigate("https://busymate.ai/chat/w/busyproxy?x=1")).toBe(false);
     expect(navigate("https://example.com/page?token=secret")).toBe(true);
     expect(navigate("javascript:alert(1)")).toBe(true);
     expect(navigate("https://example.com/frame", false)).toBe(false);

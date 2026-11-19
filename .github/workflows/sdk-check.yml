@@ -48,14 +48,14 @@ jobs:
         shell: bash
         run: |
           npm ci
-          npm install --no-save ../busymate-ai-electron-1.0.2.tgz
-          node -e "const s=require('@busymate/ai-electron'); if (s.SDK_VERSION!=='1.0.2') process.exit(1); const fs=require('fs'); for (const p of [s.preloadPath(), s.bridgePreloadPath()]) if (!fs.existsSync(p)) { console.error('missing', p); process.exit(1) } console.log('example resolves', s.SDK_VERSION, s.preloadPath())"
+          npm install --no-save ../busymate-ai-electron-1.0.4.tgz
+          node -e "const s=require('@busymate/ai-electron'); if (s.SDK_VERSION!=='1.0.4') process.exit(1); const fs=require('fs'); for (const p of [s.preloadPath(), s.bridgePreloadPath()]) if (!fs.existsSync(p)) { console.error('missing', p); process.exit(1) } console.log('example resolves', s.SDK_VERSION, s.preloadPath())"
           node --check main.js && node --check settings-preload.js && node --check renderer/settings.js
       - if: matrix.os == 'linux'
         uses: actions/upload-artifact@v4
         with:
-          name: busymate-ai-electron-1.0.2
-          path: busymate-ai-electron-1.0.2.tgz
+          name: busymate-ai-electron-1.0.4
+          path: busymate-ai-electron-1.0.4.tgz
 
   smoke:
     name: smoke (xvfb, example app)
@@ -75,7 +75,7 @@ jobs:
         working-directory: example-app
         run: |
           npm ci
-          npm install --no-save ../busymate-ai-electron-1.0.2.tgz
+          npm install --no-save ../busymate-ai-electron-1.0.4.tgz
       # The k3s runner pod runs with no-new-privs and no user namespaces, so Chromium's OS-level process sandbox
       # (setuid helper or userns) cannot start there: the example launches with --no-sandbox. The renderer's
       # webPreferences (sandbox: true, contextIsolation, no nodeIntegration) are still asserted by the smoke itself.
