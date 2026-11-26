@@ -20,7 +20,7 @@ git clone --branch 1.0.4 --depth 1 https://github.com/serebano/busymate-ai-sdk-e
 npm install ./vendor/busymate-ai-sdk-electron
 ```
 
-The package ships CommonJS (`dist/index.js`) and ESM (`dist/index.mjs`) with TypeScript types. It has no runtime dependencies; `electron` (30 or later, for `WebContentsView`) is a peer dependency. The reference build uses Electron 44.4.5, Node 22 and TypeScript 6.0.
+The package ships CommonJS (`dist/index.js`) and ESM (`dist/index.mjs`) with TypeScript types. It has no runtime dependencies; `electron` (43 or later, the supported Electron lines; `WebContentsView` is required) is a peer dependency. The reference build uses Electron 44.11.6, Node 22 and TypeScript 6.0.
 
 ## Integrate
 
